@@ -1,9 +1,19 @@
 package com.bridgelabz;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CabInvoiceServiceTest {
+
+    InvoiceGenerator invoiceGenerator = null;
+
+    @Before
+    public void setUp() throws Exception {
+        invoiceGenerator = new InvoiceGenerator();
+    }
+
+
     @Test
     public void givenDistanceAndTime_shouldReturnTotalFare() {
         InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
@@ -23,12 +33,12 @@ public class CabInvoiceServiceTest {
     }
 
     @Test
-    public void givenMultipleRides_shouldReturnTotalFare() {
-        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+    public void givenMultipleRides_shouldReturnInvoiceSummary() {
         Ride[] rides = { new Ride(2.0, 5),
                 new Ride(0.1, 1)};
-        double fare = invoiceGenerator.calculateFare(rides);
-        Assert.assertEquals(30, fare, 0.0);
+        InvoiceSummary summary = invoiceGenerator.calculateFare(rides);
+        InvoiceSummary expectedInvoiceSummary = new InvoiceSummary(2, 30.0);
+        Assert.assertEquals(expectedInvoiceSummary, summary);
     }
 
 
