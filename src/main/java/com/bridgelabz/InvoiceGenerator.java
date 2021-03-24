@@ -31,4 +31,7 @@ public class InvoiceGenerator {
     public InvoiceSummary getInvoiceSummary(String userId) {
         return this.calculateFare(rideRepository.getRides(userId));
     }
+
+    public void setRideRepository(RideRepository rideRepository) {
+    }
 }
